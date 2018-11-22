@@ -6,11 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/edt1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
 
     <Button
         android:id="@+id/button1"
@@ -23,6 +18,7 @@
         android:layout_marginTop="90dp"
         android:layout_marginEnd="-1dp"
         android:layout_marginRight="-1dp"
+        android:onClick="add"
         android:text="1" />
 
     <Button
@@ -31,8 +27,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/button1"
-        android:layout_toLeftOf="@+id/button3"
         android:layout_toStartOf="@+id/button3"
+        android:layout_toLeftOf="@+id/button3"
+        android:onClick="add"
         android:text="2" />
 
     <Button
@@ -42,6 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/button2"
         android:layout_centerHorizontal="true"
+        android:onClick="add"
         android:text="3" />
 
     <Button
@@ -51,6 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/button1"
         android:layout_toLeftOf="@+id/button2"
+        android:onClick="add"
         android:text="4" />
 
     <Button
@@ -58,9 +57,10 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/button4"
-        android:layout_alignLeft="@+id/button2"
         android:layout_alignStart="@+id/button2"
+        android:layout_alignLeft="@+id/button2"
+        android:layout_alignBottom="@+id/button4"
+        android:onClick="add"
         android:text="5" />
 
     <Button
@@ -68,9 +68,10 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button3"
-        android:layout_alignStart="@+id/button3"
         android:layout_below="@+id/button3"
+        android:layout_alignStart="@+id/button3"
+        android:layout_alignLeft="@+id/button3"
+        android:onClick="add"
         android:text="6" />
 
     <Button
@@ -80,6 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/button4"
         android:layout_toLeftOf="@+id/button2"
+        android:onClick="add"
         android:text="7" />
 
     <Button
@@ -87,9 +89,10 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button5"
-        android:layout_alignStart="@+id/button5"
         android:layout_below="@+id/button5"
+        android:layout_alignStart="@+id/button5"
+        android:layout_alignLeft="@+id/button5"
+        android:onClick="add"
         android:text="8" />
 
     <Button
@@ -97,9 +100,10 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button6"
-        android:layout_alignStart="@+id/button6"
         android:layout_below="@+id/button6"
+        android:layout_alignStart="@+id/button6"
+        android:layout_alignLeft="@+id/button6"
+        android:onClick="add"
         android:text="9" />
 
     <Button
@@ -107,12 +111,13 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/button3"
         android:layout_alignEnd="@+id/edt1"
         android:layout_alignRight="@+id/edt1"
-        android:layout_alignTop="@+id/button3"
-        android:layout_marginLeft="46dp"
         android:layout_marginStart="46dp"
+        android:layout_marginLeft="46dp"
         android:layout_toRightOf="@+id/button3"
+        android:onClick="add"
         android:text="+" />
 
     <Button
@@ -120,11 +125,12 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/buttonadd"
-        android:layout_alignLeft="@+id/buttonadd"
-        android:layout_alignRight="@+id/buttonadd"
-        android:layout_alignStart="@+id/buttonadd"
         android:layout_below="@+id/buttonadd"
+        android:layout_alignStart="@+id/buttonadd"
+        android:layout_alignLeft="@+id/buttonadd"
+        android:layout_alignEnd="@+id/buttonadd"
+        android:layout_alignRight="@+id/buttonadd"
+        android:onClick="add"
         android:text="-" />
 
     <Button
@@ -132,11 +138,12 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonsub"
+        android:layout_alignStart="@+id/buttonsub"
         android:layout_alignLeft="@+id/buttonsub"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignStart="@+id/buttonsub"
-        android:layout_below="@+id/buttonsub"
+        android:onClick="add"
         android:text="*" />
 
     <Button
@@ -146,6 +153,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/button7"
         android:layout_toLeftOf="@+id/button2"
+        android:onClick="add"
         android:text="." />
 
     <Button
@@ -153,9 +161,10 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button8"
-        android:layout_alignStart="@+id/button8"
         android:layout_below="@+id/button8"
+        android:layout_alignStart="@+id/button8"
+        android:layout_alignLeft="@+id/button8"
+        android:onClick="add"
         android:text="0" />
 
     <Button
@@ -163,9 +172,13 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button9"
-        android:layout_alignStart="@+id/button9"
         android:layout_below="@+id/button9"
+        android:layout_alignStart="@+id/button9"
+        android:layout_alignLeft="@+id/button9"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="-2dp"
+        android:onClick="deleteLast"
         android:text="C" />
 
     <Button
@@ -173,23 +186,61 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/buttonmul"
-        android:layout_alignLeft="@+id/buttonmul"
-        android:layout_alignRight="@+id/buttonmul"
-        android:layout_alignStart="@+id/buttonmul"
         android:layout_below="@+id/buttonmul"
+        android:layout_alignStart="@+id/buttonmul"
+        android:layout_alignLeft="@+id/buttonmul"
+        android:layout_alignEnd="@+id/buttonmul"
+        android:layout_alignRight="@+id/buttonmul"
+        android:onClick="add"
         android:text="/" />
 
     <Button
         android:id="@+id/buttoneql"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/buttondiv"
-        android:layout_alignLeft="@+id/button10"
-        android:layout_alignRight="@+id/buttondiv"
-        android:layout_alignStart="@+id/button10"
         android:layout_below="@+id/button0"
-        android:layout_marginTop="37dp"
+        android:layout_alignStart="@+id/button10"
+        android:layout_alignLeft="@+id/button10"
+        android:layout_alignEnd="@+id/buttondiv"
+        android:layout_alignRight="@+id/buttondiv"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="73dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
+        android:onClick="calculate"
         android:text="=" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttoneql"
+        android:layout_alignStart="@+id/button1"
+        android:layout_marginStart="105dp"
+        android:layout_marginTop="12dp"
+        android:onClick="openHistory"
+        android:text="history" />
+
+    <TextView
+        android:id="@+id/showEquation"
+        android:layout_width="317dp"
+        android:layout_height="38dp"
+        android:layout_alignEnd="@+id/button1"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="-220dp"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/CA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttoneql"
+        android:layout_alignStart="@+id/button1"
+        android:layout_marginBottom="-73dp"
+        android:onClick="deleteAll"
+        android:text="CA" />
 
 </RelativeLayout>
