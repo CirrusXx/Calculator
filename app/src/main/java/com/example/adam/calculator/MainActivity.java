@@ -26,31 +26,44 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         }
 
-    public void add(View view)
+    public void addToEquation(View view)
     {
-        if(equation.length()>14)
+        int lengthOfEquation = equation.length()-1;
+        TextView button = (TextView)view;
+        String character = button.getText().toString();
+        if(lengthOfEquation>14)
         {
             return;
         }
+        if(checkIfSymbol(character) && lengthOfEquation >=0)
+        {
+            if(checkIfLastIsASymbol(lengthOfEquation)) {
+                deleteLast(view);
+                equation.append(character);
+                editText();
+                return;
 
-        TextView button = (TextView)view;
-        String character = button.getText().toString();
+            }
+        }
+
         equation.append(character);
-
         editText();
     }
 
-    public void calculate(View view)
+    public void calculateEquation(View view)
     {
-        Expression expression = new Expression(equation.toString());
+        int lengthOfEquation = equation.length()-1;
+        if(checkIfLastIsASymbol(lengthOfEquation)) {
+            deleteLast(view);
+            }
 
+        Expression expression = new Expression(equation.toString());
         double result = expression.calculate();
 
         TextView textView = findViewById(R.id.showEquation);
         textView.setText(String.valueOf(result));
 
         history.add(equation.toString()+"="+result);
-
         equation.delete(0,equation.length());
     }
 
@@ -80,11 +93,40 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public boolean checkIfSymbol(String newCharInEquation)
+    {
+
+        if(newCharInEquation.equals("+"))
+        {
+            return true;
+        }
+        else if(newCharInEquation.equals("-"))
+        {
+            return true;
+        }
+        else if(newCharInEquation.equals("*"))
+        {
+            return true;
+        }
+        else if(newCharInEquation.equals("/"))
+        {
+            return true;
+        }
+        else return false;
+    }
+    public boolean checkIfLastIsASymbol(int lengthOfEquation)
+    {
+        if(equation.charAt(lengthOfEquation) == '-'
+                || equation.charAt(lengthOfEquation) == '+'
+                || equation.charAt(lengthOfEquation) == '/'
+                || equation.charAt(lengthOfEquation) == '*')
+            return true;
+
+        else return false;
+    }
     public void editText()
     {
         TextView textView = findViewById(R.id.showEquation);
         textView.setText(equation.toString());
     }
-
-
 }
