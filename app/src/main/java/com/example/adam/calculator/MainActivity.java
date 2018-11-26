@@ -42,10 +42,8 @@ public class MainActivity extends AppCompatActivity {
                 equation.append(character);
                 editText();
                 return;
-
             }
         }
-
         equation.append(character);
         editText();
     }
@@ -70,9 +68,7 @@ public class MainActivity extends AppCompatActivity {
     public void deleteLast(View view)
     {
         if(equation.length()==0)
-        {
             return;
-        }
         int index = equation.length()-1;
         equation.deleteCharAt(index);
         editText();
@@ -86,32 +82,22 @@ public class MainActivity extends AppCompatActivity {
     public void openHistory(View view)
     {
         Intent intent = new Intent(this,History.class);
-
         intent.putExtra("history",history);
-
         startActivity(intent);
-
     }
 
     public boolean checkIfSymbol(String newCharInEquation)
     {
-
         if(newCharInEquation.equals("+"))
-        {
             return true;
-        }
         else if(newCharInEquation.equals("-"))
-        {
             return true;
-        }
         else if(newCharInEquation.equals("*"))
-        {
             return true;
-        }
         else if(newCharInEquation.equals("/"))
-        {
             return true;
-        }
+        else if(newCharInEquation.equals("."))
+            return true;
         else return false;
     }
     public boolean checkIfLastIsASymbol(int lengthOfEquation)
@@ -119,9 +105,9 @@ public class MainActivity extends AppCompatActivity {
         if(equation.charAt(lengthOfEquation) == '-'
                 || equation.charAt(lengthOfEquation) == '+'
                 || equation.charAt(lengthOfEquation) == '/'
-                || equation.charAt(lengthOfEquation) == '*')
+                || equation.charAt(lengthOfEquation) == '*'
+                || equation.charAt(lengthOfEquation) == '.')
             return true;
-
         else return false;
     }
     public void editText()

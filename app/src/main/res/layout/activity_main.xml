@@ -243,4 +243,26 @@
         android:onClick="deleteAll"
         android:text="CA" />
 
+    <Button
+        android:id="@+id/leftBracket"
+        android:layout_width="64dp"
+        android:layout_height="35dp"
+        android:layout_alignTop="@+id/button1"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="197dp"
+        android:layout_marginEnd="58dp"
+        android:onClick="addToEquation"
+        android:text="(" />
+
+    <Button
+        android:id="@+id/rightBracket"
+        android:layout_width="64dp"
+        android:layout_height="35dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="54dp"
+        android:layout_marginTop="287dp"
+        android:layout_toEndOf="@+id/button"
+        android:onClick="addToEquation"
+        android:text=")" />
+
 </RelativeLayout>
