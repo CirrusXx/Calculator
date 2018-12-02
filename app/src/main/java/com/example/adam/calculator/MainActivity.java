@@ -28,16 +28,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void addToEquation(View view)
     {
-        int lengthOfEquation = equation.length()-1;
         TextView button = (TextView)view;
         String character = button.getText().toString();
-        if(lengthOfEquation>14)
+        if(getSizeOfEquation()>14)
         {
             return;
         }
-        if(checkIfSymbol(character) && lengthOfEquation >=0)
+        if(checkIfSymbol(character) && getSizeOfEquation() >=0)
         {
-            if(checkIfLastIsASymbol(lengthOfEquation)) {
+            if(checkIfLastIsASymbol(getSizeOfEquation())) {
                 deleteLast(view);
                 equation.append(character);
                 editText();
@@ -50,8 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void calculateEquation(View view)
     {
-        int lengthOfEquation = equation.length()-1;
-        if(checkIfLastIsASymbol(lengthOfEquation)) {
+        if(checkIfLastIsASymbol(getSizeOfEquation())) {
             deleteLast(view);
             }
 
@@ -69,8 +67,7 @@ public class MainActivity extends AppCompatActivity {
     {
         if(equation.length()==0)
             return;
-        int index = equation.length()-1;
-        equation.deleteCharAt(index);
+        equation.deleteCharAt(getSizeOfEquation());
         editText();
     }
     public void deleteAll(View view)
@@ -115,4 +112,10 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = findViewById(R.id.showEquation);
         textView.setText(equation.toString());
     }
+
+    public int getSizeOfEquation()
+    {
+        return equation.length()-1;
+    }
+
 }
