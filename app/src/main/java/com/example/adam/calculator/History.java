@@ -10,30 +10,20 @@ import java.util.ArrayList;
 
 public class History extends AppCompatActivity {
 
-    @Override
+    DataBaseManager dataBase = new DataBaseManager(this);
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
-        Intent intent = getIntent();
-
-        ArrayList<String> listOfHistory = intent.getStringArrayListExtra("history");
-
 
         TextView listView = findViewById(R.id.historyView);
-
-        for(String i : listOfHistory)
-        {
-            listView.setText(listView.getText()+i+"\n");
-        }
-
-
+        listView.setText(dataBase.getData().toString());
     }
-    public void back(View view)
-    {
+
+    public void back(View view) {
         finish();
     }
 
-
-
-
+    public void deleteHistoryOnClick(View view) {
+        dataBase.clearDatabase();
+    }
 }
