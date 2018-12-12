@@ -51,13 +51,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void CalculateEquationOnClick(View view) {
+        if (equation.length() == 0) {
+            return;
+        }
+
         if (checkIfLastIsASymbol(getSizeOfEquation())) {
             deleteLastOnClick(view);
         }
 
         showResultOfEquation(resultOfEquation());
         addToDataBase(equation.toString() + "=" + resultOfEquation());
-        deleteAllWithoutEditOfText();
+        deleteEverythingInEquation();
+    }
+
+    public void deleteAllAndEditTextOnClick(View view) {
+        equation.delete(0, equation.length());
+        editText();
+    }
+
+    public void deleteLastOnClick(View view) {
+        if (equation.length() == 0)
+            return;
+        equation.deleteCharAt(getSizeOfEquation());
+        editText();
     }
 
     public void openHistoryOnClick(View view) {
@@ -65,24 +81,24 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public boolean checkIfSymbol(String newCharInEquation) {
-        if (newCharInEquation.equals("+")
-                || newCharInEquation.equals("-")
-                || newCharInEquation.equals("*")
-                || (newCharInEquation.equals("/")
-                || newCharInEquation.equals("."))) {
-            return true;
-        } else return false;
+    public void addToDataBase(String result) {
+        dataBase.insertData(result);
+    }
+
+    public boolean checkIfSymbol(String character) {
+        return (character.equals("+")
+                || character.equals("*")
+                || character.equals("-")
+                || character.equals("/")
+                || character.equals("."));
     }
 
     public boolean checkIfLastIsASymbol(int lengthOfEquation) {
-        if (equation.charAt(lengthOfEquation) == '-'
+        return (equation.charAt(lengthOfEquation) == '-'
                 || equation.charAt(lengthOfEquation) == '+'
                 || equation.charAt(lengthOfEquation) == '/'
                 || equation.charAt(lengthOfEquation) == '*'
-                || equation.charAt(lengthOfEquation) == '.') {
-            return true;
-        } else return false;
+                || equation.charAt(lengthOfEquation) == '.');
     }
 
     public int getSizeOfEquation() {
@@ -94,28 +110,12 @@ public class MainActivity extends AppCompatActivity {
         textView.setText(String.valueOf(result));
     }
 
-    public void addToDataBase(String result) {
-        dataBase.insertData(result);
-    }
-
     public double resultOfEquation() {
         Expression expression = new Expression(equation.toString());
         return expression.calculate();
     }
 
-    public void deleteLastOnClick(View view) {
-        if (equation.length() == 0)
-            return;
-        equation.deleteCharAt(getSizeOfEquation());
-        editText();
-    }
-
-    public void deleteAllOnClick(View view) {
-        equation.delete(0, equation.length());
-        editText();
-    }
-
-    public void deleteAllWithoutEditOfText() {
+    public void deleteEverythingInEquation() {
         equation.delete(0, equation.length());
     }
 
@@ -132,6 +132,4 @@ public class MainActivity extends AppCompatActivity {
     public void addToEquation(String character) {
         equation.append(character);
     }
-
-
 }
