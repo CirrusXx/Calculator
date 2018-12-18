@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class History extends AppCompatActivity {
+public class HistoryActivity extends AppCompatActivity {
 
-    DataBaseManager dataBase = new DataBaseManager(this);
+    private DataBaseCalculator dataBase = new DataBaseCalculator(this);
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +24,7 @@ public class History extends AppCompatActivity {
         dataBase.clearDatabase();
     }
 
-    public void setListView(String data) {
+    private void setListView(String data) {
         TextView listView = findViewById(R.id.historyView);
         listView.setText(data);
     }

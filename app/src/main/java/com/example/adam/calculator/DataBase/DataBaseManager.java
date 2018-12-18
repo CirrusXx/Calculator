@@ -1,11 +1,9 @@
-package com.example.adam.calculator;
-import android.content.ContentValues;
+package com.example.adam.calculator.DataBase;
+
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.util.ArrayList;
 
 public class DataBaseManager extends SQLiteOpenHelper {
     public static final String TABLE_NAME = "HISTORY";
@@ -17,7 +15,7 @@ public class DataBaseManager extends SQLiteOpenHelper {
                     ID_COLUMN + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     PATH_NAME + " TEXT)";
 
-    private static final String SQL_DELETE_ENTRIES =
+    public static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + TABLE_NAME;
 
     public static final int DATABASE_VERSION = 1;
@@ -35,35 +33,6 @@ public class DataBaseManager extends SQLiteOpenHelper {
     }
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
-    }
-
-    public boolean insertData(String Equation)
-    {
-        SQLiteDatabase database = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(PATH_NAME,Equation);
-        long result = database.insert(TABLE_NAME,null,contentValues);
-        if(result==-1) return false;
-        return true;
-    }
-
-    public ArrayList<String> getData()
-    {
-        SQLiteDatabase database = this.getWritableDatabase();
-        Cursor result = database.rawQuery("select * from "+TABLE_NAME,null);
-        ArrayList<String> listOfEquations = new ArrayList<>();
-        while(result.moveToNext())
-        {
-            listOfEquations.add(result.getString(1));
-        }
-        return listOfEquations;
-    }
-
-    public void clearDatabase()
-    {
-        SQLiteDatabase database = this.getWritableDatabase();
-        database.execSQL(SQL_DELETE_ENTRIES);
-        onCreate(database);
     }
 }
 

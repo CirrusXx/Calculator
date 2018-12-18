@@ -11,8 +11,8 @@ import org.mariuszgromada.math.mxparser.Expression;
 public class MainActivity extends AppCompatActivity {
 
 
-    StringBuilder equation = new StringBuilder();
-    DataBaseManager dataBase = new DataBaseManager(this);
+    private StringBuilder equation = new StringBuilder();
+    private DataBaseCalculator dataBase = new DataBaseCalculator(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,33 +21,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addToEquationOnClick(View view) {
-        if (getSizeOfEquation() > 14) {
+        if (getLastIndexOfEquation() > 14) {
             return;
         }
 
-        if (getSizeOfEquation() == -1 && checkIfSymbol(getCharacter(view))) {
+        if (getLastIndexOfEquation() == -1 && checkIfAddedIsSymbol(getCharacter(view))) {
             if (getCharacter(view).equals("-")) {
                 addToEquation(getCharacter(view));
-                editText();
+                editTextOfEquation();
                 return;
             } else if (getCharacter(view).equals(".")) {
                 equation.append("0");
                 addToEquation(getCharacter(view));
-                editText();
+                editTextOfEquation();
                 return;
             } else return;
         }
 
-        if (checkIfSymbol(getCharacter(view)) && getSizeOfEquation() >= 0) {
-            if (checkIfLastIsASymbol(getSizeOfEquation())) {
+        if (checkIfAddedIsSymbol(getCharacter(view)) && getLastIndexOfEquation() >= 0) {
+            if (checkIfLastInAnEquationIsASymbol(getLastIndexOfEquation())) {
                 deleteLastOnClick(view);
                 addToEquation(getCharacter(view));
-                editText();
+                editTextOfEquation();
                 return;
             }
         }
         addToEquation(getCharacter(view));
-        editText();
+        editTextOfEquation();
     }
 
     public void CalculateEquationOnClick(View view) {
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        if (checkIfLastIsASymbol(getSizeOfEquation())) {
+        if (checkIfLastInAnEquationIsASymbol(getLastIndexOfEquation())) {
             deleteLastOnClick(view);
         }
 
@@ -66,26 +66,26 @@ public class MainActivity extends AppCompatActivity {
 
     public void deleteAllAndEditTextOnClick(View view) {
         equation.delete(0, equation.length());
-        editText();
+        editTextOfEquation();
     }
 
     public void deleteLastOnClick(View view) {
         if (equation.length() == 0)
             return;
-        equation.deleteCharAt(getSizeOfEquation());
-        editText();
+        equation.deleteCharAt(getLastIndexOfEquation());
+        editTextOfEquation();
     }
 
     public void openHistoryOnClick(View view) {
-        Intent intent = new Intent(this, History.class);
+        Intent intent = new Intent(this, HistoryActivity.class);
         startActivity(intent);
     }
 
-    public void addToDataBase(String result) {
+    private void addToDataBase(String result) {
         dataBase.insertData(result);
     }
 
-    public boolean checkIfSymbol(String character) {
+    private boolean checkIfAddedIsSymbol(String character) {
         return (character.equals("+")
                 || character.equals("*")
                 || character.equals("-")
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 || character.equals("."));
     }
 
-    public boolean checkIfLastIsASymbol(int lengthOfEquation) {
+    private boolean checkIfLastInAnEquationIsASymbol(int lengthOfEquation) {
         return (equation.charAt(lengthOfEquation) == '-'
                 || equation.charAt(lengthOfEquation) == '+'
                 || equation.charAt(lengthOfEquation) == '/'
@@ -101,25 +101,25 @@ public class MainActivity extends AppCompatActivity {
                 || equation.charAt(lengthOfEquation) == '.');
     }
 
-    public int getSizeOfEquation() {
+    private int getLastIndexOfEquation() {
         return equation.length() - 1;
     }
 
-    public void showResultOfEquation(double result) {
+    private void showResultOfEquation(double result) {
         TextView textView = findViewById(R.id.showEquation);
         textView.setText(String.valueOf(result));
     }
 
-    public double resultOfEquation() {
+    private double resultOfEquation() {
         Expression expression = new Expression(equation.toString());
         return expression.calculate();
     }
 
-    public void deleteEverythingInEquation() {
+    private void deleteEverythingInEquation() {
         equation.delete(0, equation.length());
     }
 
-    public void editText() {
+    private void editTextOfEquation() {
         TextView textView = findViewById(R.id.showEquation);
         textView.setText(equation.toString());
     }
@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
         return button.getText().toString();
     }
 
-    public void addToEquation(String character) {
+    private void addToEquation(String character) {
         equation.append(character);
     }
 }
