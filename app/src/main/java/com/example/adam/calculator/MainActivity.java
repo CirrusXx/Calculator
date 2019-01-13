@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        if (getLastIndexOfEquation() == -1 && checkIfAddedIsSymbol(getCharacter(view))) {
+        if (getLengthOfTheEquation() == 0 && checkIfAddedIsSymbol(getCharacter(view))) {
             if (getCharacter(view).equals("-")) {
                 addToEquation(getCharacter(view));
                 editTextOfEquation();
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void CalculateEquationOnClick(View view) {
-        if (equation.length() == 0) {
+        if (getLengthOfTheEquation() == 0) {
             return;
         }
 
@@ -64,21 +64,20 @@ public class MainActivity extends AppCompatActivity {
         deleteEverythingInEquation();
     }
 
-    public void deleteAllAndEditTextOnClick(View view) {
-        equation.delete(0, equation.length());
-        editTextOfEquation();
-    }
-
     public void deleteLastOnClick(View view) {
         if (equation.length() == 0)
             return;
         equation.deleteCharAt(getLastIndexOfEquation());
         editTextOfEquation();
     }
-
     public void openHistoryOnClick(View view) {
         Intent intent = new Intent(this, HistoryActivity.class);
         startActivity(intent);
+    }
+
+    public void deleteAllAndEditTextOnClick(View view) {
+        equation.delete(0, equation.length());
+        editTextOfEquation();
     }
 
     private void addToDataBase(String result) {
@@ -104,7 +103,9 @@ public class MainActivity extends AppCompatActivity {
     private int getLastIndexOfEquation() {
         return equation.length() - 1;
     }
-
+    private int getLengthOfTheEquation() {
+        return equation.length();
+    }
     private void showResultOfEquation(double result) {
         TextView textView = findViewById(R.id.showEquation);
         textView.setText(String.valueOf(result));
