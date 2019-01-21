@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     private StringBuilder equation = new StringBuilder();
     private DataBaseCalculator dataBase = new DataBaseCalculator(this);
+    private String[] symbolsArray = {"+", "-", "/", ".", "*"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,16 +27,19 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (getLengthOfTheEquation() == 0 && checkIfAddedIsSymbol(getCharacter(view))) {
-            if (getCharacter(view).equals("-")) {
-                addToEquation(getCharacter(view));
-                editTextOfEquation();
-                return;
-            } else if (getCharacter(view).equals(".")) {
-                equation.append("0");
-                addToEquation(getCharacter(view));
-                editTextOfEquation();
-                return;
-            } else return;
+            switch (getCharacter(view)) {
+                case "-":
+                    addToEquation(getCharacter(view));
+                    editTextOfEquation();
+                    return;
+                case ".":
+                    equation.append("0");
+                    addToEquation(getCharacter(view));
+                    editTextOfEquation();
+                    return;
+                default:
+                    return;
+            }
         }
 
         if (checkIfAddedIsSymbol(getCharacter(view)) && getLastIndexOfEquation() >= 0) {
@@ -70,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         equation.deleteCharAt(getLastIndexOfEquation());
         editTextOfEquation();
     }
+
     public void openHistoryOnClick(View view) {
         Intent intent = new Intent(this, HistoryActivity.class);
         startActivity(intent);
@@ -85,27 +90,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean checkIfAddedIsSymbol(String character) {
-        return (character.equals("+")
-                || character.equals("*")
-                || character.equals("-")
-                || character.equals("/")
-                || character.equals("."));
+        for (String aSymbolsArray : symbolsArray) {
+            if (aSymbolsArray.equals(character)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean checkIfLastInAnEquationIsASymbol(int lengthOfEquation) {
-        return (equation.charAt(lengthOfEquation) == '-'
-                || equation.charAt(lengthOfEquation) == '+'
-                || equation.charAt(lengthOfEquation) == '/'
-                || equation.charAt(lengthOfEquation) == '*'
-                || equation.charAt(lengthOfEquation) == '.');
+        for (String aSymbolsArray : symbolsArray) {
+            if (aSymbolsArray.equals(String.valueOf(equation.charAt(lengthOfEquation)))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private int getLastIndexOfEquation() {
         return equation.length() - 1;
     }
+
     private int getLengthOfTheEquation() {
         return equation.length();
     }
+
     private void showResultOfEquation(double result) {
         TextView textView = findViewById(R.id.showEquation);
         textView.setText(String.valueOf(result));
